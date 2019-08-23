@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-http="http://www.springframework.org/schema/integration/http"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/integration
+    http://www.springframework.org/schema/integration/spring-integration.xsd
+    http://www.springframework.org/schema/integration/http
+    http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
+    ">
+
+    <!--http://www.springframework.org/schema/integration/http/spring-integration-http.xsd"-->
+    <!--xmlns:int-http="http://www.springframework.org/schema/integration/http"-->
+
+    <int:channel id="requestChannel"/>
+
+    <int:channel id="filterChannel"/>
+
+    <int:channel id="filteredChannel"/>
+
+    <int:channel id="splitChannel"/>
+
+    <int:channel id="activatorChannel"/>
+
+    <int:channel id="aggregatorChannel"/>
+
+    <int:channel id="responseChannel"/>
+
+    <int:gateway default-request-channel="requestChannel"
+                 default-reply-channel="responseChannel"
+                 service-interface="com.example.SpringIntegration.gateways.BasicGateWay" />
+
+    <int:filter ref="filter" input-channel="requestChannel" output-channel="filterChannel" />
+
+    <int:transformer ref="transformer" method="transform" input-channel="filterChannel" output-channel="splitChannel" />
+
+    <int:splitter ref="splitter" input-channel="splitChannel" output-channel="aggregatorChannel" />
+
+    <int:aggregator ref="aggregator" input-channel="aggregatorChannel" output-channel="activatorChannel" />
+
+    <int:service-activator ref="activator" input-channel="activatorChannel" output-channel="responseChannel" />
+
+</beans>

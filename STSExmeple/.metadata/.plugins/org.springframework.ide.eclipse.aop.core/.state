@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="SpringBootDBExample"/>
+<aop-project name="ratings-data-service"/>
+<aop-project name="discovery-server"/>
+<aop-project name="SpringKafkaProAndSub"/>
+<aop-project name="movie-info-service"/>
+<aop-project name="SpringKafkaApplication"/>
+<aop-project name="OracleERPApplication"/>
+<aop-project name="movie-catalog-service"/>
+<aop-project name="SpringKafkaSubscriber"/>
+</aop-reference-model>
